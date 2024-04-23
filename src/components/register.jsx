@@ -1,11 +1,36 @@
 import { useState } from "react";
 import { logo_primary } from "../constants";
 import { Input } from "../ui";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  registerUserfailure,
+  registerUserStart,
+  registerUserSuccess,
+} from "../slice/auth";
+import AuthService from "../service/auth";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+  const { isLoading } = useSelector((store) => store.auth);
+
+  const registerHandler = async (e) => {
+    e.preventDefault();
+    dispatch(registerUserStart());
+    const user = { username: name, email, password };
+    try {
+      const response = await AuthService.userRegister(user);
+      console.log(response);
+      console.log(user);
+      dispatch(registerUserSuccess());
+    } catch (error) {
+      dispatch(registerUserfailure());
+      console.error(error);
+    }
+  };
 
   return (
     <div className="conteiner w-100 p-5">
@@ -31,8 +56,19 @@ const Register = () => {
           state={password}
           setState={setPassword}
         />
-        <button className="btn btn-secondary w-100 py-2" type="submit">
-          Register
+        <button
+          className={`btn w-100 py-2 ${
+            isLoading ? "btn-warning" : "btn-secondary"
+          }`}
+          onClick={registerHandler}
+          type="submit"
+          style={{
+            transition: "0.5s ease",
+            opacity: `${isLoading ? "0.3" : "1"}`,
+          }}
+          disabled={isLoading}
+        >
+          {isLoading ? "Registering..." : "Register"}
         </button>
       </form>
     </div>

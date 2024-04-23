@@ -10,8 +10,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.auth);
 
-  console.log(isLoading);
-
   const loginHandler = (e) => {
     e.preventDefault();
     dispatch(loginUserStart());
@@ -42,10 +40,11 @@ const Login = () => {
           type="submit"
           style={{
             transition: "0.5s ease",
+            opacity: `${isLoading ? "0.3" : "1"}`,
           }}
           disabled={isLoading}
         >
-          {isLoading ? "Wait..." : "Login"}
+          {isLoading ? "Logging in..." : "Login"}
         </button>
       </form>
     </div>
