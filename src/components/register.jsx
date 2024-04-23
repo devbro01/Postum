@@ -2,11 +2,7 @@ import { useState } from "react";
 import { logo_primary } from "../constants";
 import { Input } from "../ui";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  registerUserfailure,
-  registerUserStart,
-  registerUserSuccess,
-} from "../slice/auth";
+import { signUserStart, signUserSuccess, signUserFailure } from "../slice/auth";
 import AuthService from "../service/auth";
 
 const Register = () => {
@@ -19,16 +15,13 @@ const Register = () => {
 
   const registerHandler = async (e) => {
     e.preventDefault();
-    dispatch(registerUserStart());
+    dispatch(signUserStart());
     const user = { username: name, email, password };
     try {
       const response = await AuthService.userRegister(user);
-      console.log(response);
-      console.log(user);
-      dispatch(registerUserSuccess());
+      dispatch(signUserSuccess(response));
     } catch (error) {
-      dispatch(registerUserfailure());
-      console.error(error);
+      dispatch(signUserFailure(error.response.data.errors));
     }
   };
 
@@ -37,7 +30,6 @@ const Register = () => {
       <form className="text-center w-25 mx-auto mt-5">
         <img className="mb-4" src={logo_primary} alt="logo" width="72" />
         <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
-
         <Input
           label={"Username"}
           type={"text"}
