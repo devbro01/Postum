@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import AuthService from './service/auth';
 import { useDispatch } from 'react-redux';
 import { signUserSuccess } from './slice/auth';
+import { getItem } from './helpers/storage';
 
 function App() {
   const dispatch = useDispatch();
@@ -18,8 +19,12 @@ function App() {
   };
 
   useEffect(() => {
-    getUser();
-  }, []);
+    // check token aviability
+    const token = getItem('token');
+    if (token) {
+      getUser();
+    }
+  });
 
   return (
     <>
