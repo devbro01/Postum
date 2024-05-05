@@ -28,21 +28,7 @@ const Navbar = () => {
             <img src={logo} alt="blogs-logo" width={'150px'} />
           </Link>
         </div>
-
-        <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-          <li className="nav-item">
-            <Link to={'/'} className="nav-link px-2 text-dark" href="#">
-              Home
-            </Link>
-          </li>
-
-          <li className="nav-item">
-            <Link to={'/about'} className="nav-link px-2 text-dark" href="#">
-              About
-            </Link>
-          </li>
-        </ul>
-
+        {/* register & login || user & LogOut */}
         <div className="col-md-3 text-end">
           {!loggedIn ? (
             <>

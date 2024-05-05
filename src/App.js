@@ -6,10 +6,16 @@ import { useDispatch } from 'react-redux';
 import { signUserSuccess } from './slice/auth';
 import { getItem } from './helpers/storage';
 import ArticleService from './service/article';
+import {
+  getArticlesFailure,
+  getArticlesStart,
+  getArticlesSuccess
+} from './slice/article';
 
 function App() {
   const dispatch = useDispatch();
 
+  // get user from JWT token
   const getUser = async () => {
     try {
       const response = await AuthService.getUser();
@@ -19,12 +25,15 @@ function App() {
     }
   };
 
+  // get content
   const getArticles = async () => {
+    dispatch(getArticlesStart());
     try {
       const response = await ArticleService.getArticles();
-      console.log(response);
+      // console.log(response);
+      dispatch(getArticlesSuccess(response.articles));
     } catch (error) {
-      console.log(error);
+      dispatch(getArticlesFailure(error));
     }
   };
 
