@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signUserStart, signUserSuccess, signUserFailure } from '../slice/auth';
 import AuthService from '../service/auth';
 import { ValidationError } from './';
-import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {

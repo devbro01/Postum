@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logo } from '../constants';
 import { removeItem } from '../helpers/storage';
 import { logoutUser } from '../slice/auth';
-import 'react-toastify/dist/ReactToastify.css';
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -59,7 +58,7 @@ const Navbar = () => {
               </Link>
             </>
           ) : (
-            <div>
+            <div className="d-flex align-items-center justify-content-end">
               <button className="btn btn-secondary">
                 {user.username} <i className="fa-solid fa-user" />
               </button>
