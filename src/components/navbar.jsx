@@ -17,7 +17,7 @@ const Navbar = () => {
   return (
     <div
       style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}
-      className="container sticky-top"
+      className="sticky-top"
     >
       <header className="d-flex flex-wrap align-items-center justify-content-between my-3">
         <div className="col-md-3 mb-2 mb-md-0">

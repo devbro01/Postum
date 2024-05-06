@@ -36,7 +36,7 @@ const Login = () => {
 
   return (
     <>
-      <div className="conteiner w-100 p-5">
+      <div className="w-100 p-5">
         <form className="text-center w-25 mx-auto">
           <img className="mb-4" src={logo_primary} alt="logo" width="72" />
           <h1 className="h3 mb-3 fw-normal">Login</h1>
