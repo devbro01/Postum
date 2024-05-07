@@ -1,31 +1,32 @@
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import ArticleService from "../service/article";
-import { useDispatch } from "react-redux";
+import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import ArticleService from '../service/article'
+import { useDispatch } from 'react-redux'
 import {
-  getArticleDetailFailure,
-  getArticleDetailStart,
-} from "../slice/article";
+    getArticleDetailFailure,
+    getArticleDetailStart,
+    getArticleDetailSuccess,
+} from '../slice/article'
 
 const Article = () => {
-  const { slug } = useParams();
-  const dispatch = useDispatch((state) => state.article);
+    const { slug } = useParams()
+    const dispatch = useDispatch((state) => state.article)
 
-  useEffect(() => {
-    const getArticleDetail = async () => {
-      dispatch(getArticleDetailStart());
-      try {
-        const response = await ArticleService.getArticleDetail(slug);
-        dispatch(getArticleDetailStart(response));
-      } catch (error) {
-        dispatch(getArticleDetailFailure());
-      }
-    };
+    useEffect(() => {
+        const getArticleDetail = async () => {
+            dispatch(getArticleDetailStart())
+            try {
+                const response = await ArticleService.getArticleDetail(slug)
+                dispatch(getArticleDetailSuccess(response))
+            } catch (error) {
+                dispatch(getArticleDetailFailure())
+            }
+        }
 
-    getArticleDetail();
-  }, [slug]);
+        getArticleDetail()
+    }, [slug])
 
-  return <div>slug: {slug}</div>;
-};
+    return <>slug: {slug}</>
+}
 
-export default Article;
+export default Article
