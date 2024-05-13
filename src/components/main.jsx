@@ -1,11 +1,31 @@
-import { useSelector } from "react-redux";
-import { Loader } from "../ui";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
+import { Loader } from '../ui'
+import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { getArticlesFailure, getArticlesStart, getArticlesSuccess } from '../slice/article'
+import ArticleService from '../service/article'
 
 const Main = () => {
-  const { articles, isLoading } = useSelector((store) => store.article);
-  const navigate = useNavigate();
-
+  const { articles, isLoading } = useSelector((store) => store.article)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  
+    // get articles
+    const getArticles = async () => {
+      dispatch(getArticlesStart())
+      try {
+        const response = await ArticleService.getArticles()
+        // console.log(response);
+        dispatch(getArticlesSuccess(response.articles))
+      } catch (error) {
+        dispatch(getArticlesFailure(error))
+      }
+    }
+    
+    useEffect(() => {
+      getArticles()
+    }, [])
+  
   return (
     <>
       <div className="album py-5">
@@ -14,7 +34,7 @@ const Main = () => {
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {articles.map((item) => (
               <div className="col" key={item.id}>
-                <div className="card shadow-sm h-100">
+                <div className="card shadow h-100">
                   <svg
                     className="bd-placeholder-img card-img-top"
                     width="100%"
@@ -37,27 +57,24 @@ const Main = () => {
                     <div className="btn-group">
                       <button
                         onClick={() => {
-                          navigate(`/article/${item.slug}`);
+                          navigate(`/article/${item.slug}`)
                         }}
                         type="button"
                         className="btn btn-sm btn-outline-secondary"
                       >
                         View
                       </button>
-                      <button
-                        type="button"
-                        className="btn btn-sm btn-outline-secondary"
-                      >
+                      <button type="button" className="btn btn-sm btn-outline-secondary">
                         Edit
                       </button>
                       <button type="button" className="btn btn-sm btn-danger">
                         Delete
                       </button>
                     </div>
-                    <small className="text-body-secondary text-capitalize">
+                    <div className="text-body-secondary text-capitalize">
                       <i className="fa-solid fa-user mx-1" />
                       {item.author.username}
-                    </small>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -66,7 +83,7 @@ const Main = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Main;
+export default Main

@@ -1,2 +1,2 @@
-export const logo = 'https://i.postimg.cc/bwB203d4/Blogs.png'
-export const logo_primary = 'https://i.postimg.cc/MGff9VQH/blogger-color-svgrepo-com.png';
+export { default as logo } from '../assets/blogs.png'
+export const logo_primary = 'https://i.postimg.cc/MGff9VQH/blogger-color-svgrepo-com.png'
