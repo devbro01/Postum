@@ -34,7 +34,8 @@ const Register = () => {
     if (loggedIn) {
       navigate('/');
     }
-  }, [loggedIn, navigate]);
+    // eslint-disable-next-line
+  }, [loggedIn]);
 
   return (
     <>

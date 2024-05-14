@@ -32,7 +32,8 @@ const Login = () => {
     if (loggedIn) {
       navigate('/');
     }
-  }, [loggedIn, navigate]);
+    // eslint-disable-next-line
+  }, [loggedIn]);
 
   return (
     <>
@@ -55,10 +56,9 @@ const Login = () => {
             setState={setPassword}
           />
           <button
-            className={`btn w-100 py-2 ${
-              (isLoading ? 'btn-warning' : 'btn-secondary',
+            className={`btn w-100 py-2 ${(isLoading ? 'btn-warning' : 'btn-secondary',
               loggedIn ? 'btn-success' : 'btn-secondary')
-            }`}
+              }`}
             onClick={loginHandler}
             type="submit"
             style={{
