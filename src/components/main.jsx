@@ -18,7 +18,7 @@ const Main = () => {
       const response = await ArticleService.getArticles()
       dispatch(getArticlesSuccess(response.articles))
     } catch (error) {
-      dispatch(getArticlesFailure("MAIN COMPONENT", error))
+      dispatch(getArticlesFailure(error))
     }
   }
 
@@ -76,7 +76,7 @@ const Main = () => {
                       </button>
                       {loggedIn && user.username === item.author.username && (
                         <>
-                          <button type="button" className="btn btn-sm btn-outline-secondary">
+                          <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => navigate(`/edit-article/${item.slug}`)}>
                             Edit
                           </button>
                           <button type="button" className="btn btn-sm btn-danger" onClick={() => deleteArticle(item.slug)}>

@@ -26,11 +26,11 @@ const CraeteArticle = () => {
         }
     }
 
-    const formProps = { title, setTitle, description, setDescription, body, setBody, formSubmit }
+    const formProps = { title, setTitle, description, setDescription, body, setBody, formSubmit, primary: true }
 
     return (
-        <div>
-            <h1 className="text-center" style={{ fontSize: '50px', fontWeight: '600' }}>
+        <div className='text-center'>
+            <h1 style={{ fontSize: '50px', fontWeight: '600' }}>
                 Create Post
             </h1>
             <div className="w-75 mx-auto">
