@@ -1,7 +1,6 @@
 ## Porject Preview
 
-<video src="./preview.mp4">
-</video>
+![preview](preview.png)
 
 ## Available Scripts
 
