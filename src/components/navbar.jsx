@@ -50,7 +50,7 @@ const Navbar = () => {
               >
                 Create <i className="fa-solid fa-plus" />
               </button>
-              <button className="btn btn-outline-dark mx-2 d-flex align-items-center justify-content-center gap-1">
+              <button onClick={() => navigate('/profile')} className="btn btn-outline-dark mx-2 d-flex align-items-center justify-content-center gap-1">
                 {user.username} <i className="fa-solid fa-user" />
               </button>
               <button
